@@ -59,14 +59,15 @@ export class AdminComponent implements OnInit {
   getAllEmployee() {
     this.api.getPost()
     .subscribe(res=> {
-      console.log(res.data)
+      // console.log(res.data)
       this.postData = res;
     })
   }
 
   deleteEmployee(row: any) {
-    this.api.deleteEmployee(row.id)
+    this.api.deleteEmployee(row._id)
     .subscribe(res=> {
+      console.log("Delete row", row);
       alert("employee deleted");
       this.getAllEmployee();
     })

@@ -36,7 +36,7 @@ export class ApiService {
 
 
     deleteEmployee(id: number){
-      return this.http.delete<any>("http://localhost:3000/posts/"+id).pipe(map((res:any)=>{
+      return this.http.delete<any>("https://dev.softlabit.com/api/v1/blog/delete-blog-by-id/"+id).pipe(map((res:any)=>{
         return res;
       }));
     }

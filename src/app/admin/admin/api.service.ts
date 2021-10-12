@@ -29,7 +29,7 @@ export class ApiService {
     // }
 
     updateEmployee(data: any, id: number){
-      return this.http.put<any>("http://localhost:3000/posts/"+id, data).pipe(map((res:any)=>{
+      return this.http.put<any>("https://dev.softlabit.com/api/v1/blog/edit-blog-by-id/"+id, data).pipe(map((res:any)=>{
         return res;
       }));
     }

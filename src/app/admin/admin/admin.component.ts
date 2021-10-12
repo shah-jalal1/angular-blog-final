@@ -76,27 +76,28 @@ export class AdminComponent implements OnInit {
   onEdit(row: any) {
     this.showAdd = false;
     this.showUpdate = true;
-    this.formValue.controls['firstName'].setValue(row.firstName);
-    this.formValue.controls['lastName'].setValue(row.lastName);
-    this.formValue.controls['salary'].setValue(row.salary);
-    this.formValue.controls['description'].setValue(row.description);
+    this.employeeModelobj.id = row._id;
+    this.formValue.controls['title'].setValue(row.title);
+    this.formValue.controls['author'].setValue(row.author);
+    this.formValue.controls['slug'].setValue(row.slug);
+    this.formValue.controls['shortDescription'].setValue(row.shortDescription);
   }
 
-  // updateEmployeeDetails() {
-  //   this.employeeModelobj.id = this.formValue.value.id;
-  //   this.employeeModelobj.firstName = this.formValue.value.firstName;
-  //   this.employeeModelobj.lastName = this.formValue.value.lastName;
-  //   this.employeeModelobj.salary = this.formValue.value.salary;
-  //   this.employeeModelobj.description = this.formValue.value.description;
+  updateEmployeeDetails() {
+   
+    this.employeeModelobj.title = this.formValue.value.title;
+    this.employeeModelobj.author = this.formValue.value.author;
+    this.employeeModelobj.slug = this.formValue.value.slug;
+    this.employeeModelobj.shortDescription = this.formValue.value.shortDescription;
 
-  //   this.api.updateEmployee(this.employeeModelobj, this.employeeModelobj.id)
-  //   .subscribe(res => {
-  //     alert("updated successfullay");
-  //     let ref = document.getElementById('cancel');
-  //     ref?.click();
-  //     this.formValue.reset();
-  //     this.getAllEmployee();
-  //   })
-  // }
+    this.api.updateEmployee(this.employeeModelobj, this.employeeModelobj.id)
+    .subscribe(res => {
+      alert("updated successfullay");
+      let ref = document.getElementById('cancel');
+      ref?.click();
+      this.formValue.reset();
+      this.getAllEmployee();
+    })
+  }
 
 }

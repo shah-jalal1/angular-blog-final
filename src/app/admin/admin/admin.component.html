@@ -19,11 +19,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of employeeData.data">
+        <tr *ngFor="let row of postData.data">
             <td>{{row.title}}</td>
             <td>{{row.author}}</td>
             <td>{{row.slug}}</td>
-            <td>{{row.description}}</td>
+            <td></td>
            
 
             <!-- <td>{{row.id}}</td>
@@ -44,24 +44,28 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Employee Details</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Post Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
                 <form [formGroup]="formValue">
                     <div class="mb-3">
-                        <label for="exampleInputEmail1">First name</label>
-                        <input formControlName="firstName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <label for="exampleInputEmail1">Post Title</label>
+                        <input formControlName="title" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                             >
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1">Last Name</label>
-                        <input formControlName="lastName" type="text" class="form-control" id="exampleInputPassword1" >
+                        <label for="exampleInputPassword1">Post Author</label>
+                        <input formControlName="author" type="text" class="form-control" id="exampleInputPassword1" >
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputPassword1">Salary</label>
-                        <input formControlName="salary" type="text" class="form-control" id="exampleInputPassword1" >
+                        <label for="exampleInputPassword1">Post slug</label>
+                        <input formControlName="slug" type="text" class="form-control" id="exampleInputPassword1" >
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1">Post Description</label>
+                        <input formControlName="shortDescription" type="text" class="form-control" id="exampleInputPassword1" >
                     </div>
                 </form>
 
@@ -69,7 +73,7 @@
             <div class="modal-footer">
                 <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button *ngIf="showAdd" type="button" class="btn btn-primary" (click)="postEmployeeDetails()">Add</button>
-                <button *ngIf="showUpdate" type="button" class="btn btn-primary" (click)="updateEmployeeDetails()">Update</button>
+                <!-- <button *ngIf="showUpdate" type="button" class="btn btn-primary" (click)="updateEmployeeDetails()">Update</button> -->
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 export class PostModel{
         id: number = 0;
-        firstName : string = '';
-        lastName : string = '';
-        salary : string = '';
+        title : string = '';
+        author : string = '';
+        slug : string = '';
+        shortDescription : string = '';
 }

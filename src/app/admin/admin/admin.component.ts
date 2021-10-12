@@ -13,7 +13,7 @@ export class AdminComponent implements OnInit {
 
   formValue !: FormGroup;
   employeeModelobj : PostModel = new PostModel(); 
-  employeeData !: any;
+  postData !: any;
   showAdd!: boolean;
   showUpdate !: boolean;
 
@@ -22,9 +22,10 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      salary: ['']
+      title: [''],
+      author: [''],
+      slug: [''],
+      shortDescription: ['']
     })
     this.getAllEmployee();
   }
@@ -36,9 +37,10 @@ export class AdminComponent implements OnInit {
   }
 
   postEmployeeDetails() {
-    this.employeeModelobj.firstName = this.formValue.value.firstName;
-    this.employeeModelobj.lastName = this.formValue.value.lastName;
-    this.employeeModelobj.salary = this.formValue.value.salary;
+    this.employeeModelobj.title = this.formValue.value.title;
+    this.employeeModelobj.author = this.formValue.value.author;
+    this.employeeModelobj.slug = this.formValue.value.slug;
+    this.employeeModelobj.shortDescription = this.formValue.value.shortDescription;
 
     this.api.postEmployee(this.employeeModelobj)
     .subscribe(res=> {
@@ -58,7 +60,7 @@ export class AdminComponent implements OnInit {
     this.api.getPost()
     .subscribe(res=> {
       console.log(res.data)
-      this.employeeData = res;
+      this.postData = res;
     })
   }
 
@@ -73,25 +75,27 @@ export class AdminComponent implements OnInit {
   onEdit(row: any) {
     this.showAdd = false;
     this.showUpdate = true;
-    this.employeeModelobj.id = row.id;
     this.formValue.controls['firstName'].setValue(row.firstName);
     this.formValue.controls['lastName'].setValue(row.lastName);
     this.formValue.controls['salary'].setValue(row.salary);
+    this.formValue.controls['description'].setValue(row.description);
   }
 
-  updateEmployeeDetails() {
-    this.employeeModelobj.firstName = this.formValue.value.firstName;
-    this.employeeModelobj.lastName = this.formValue.value.lastName;
-    this.employeeModelobj.salary = this.formValue.value.salary;
+  // updateEmployeeDetails() {
+  //   this.employeeModelobj.id = this.formValue.value.id;
+  //   this.employeeModelobj.firstName = this.formValue.value.firstName;
+  //   this.employeeModelobj.lastName = this.formValue.value.lastName;
+  //   this.employeeModelobj.salary = this.formValue.value.salary;
+  //   this.employeeModelobj.description = this.formValue.value.description;
 
-    this.api.updateEmployee(this.employeeModelobj, this.employeeModelobj.id)
-    .subscribe(res => {
-      alert("updated successfullay");
-      let ref = document.getElementById('cancel');
-      ref?.click();
-      this.formValue.reset();
-      this.getAllEmployee();
-    })
-  }
+  //   this.api.updateEmployee(this.employeeModelobj, this.employeeModelobj.id)
+  //   .subscribe(res => {
+  //     alert("updated successfullay");
+  //     let ref = document.getElementById('cancel');
+  //     ref?.click();
+  //     this.formValue.reset();
+  //     this.getAllEmployee();
+  //   })
+  // }
 
 }

@@ -10,7 +10,7 @@ export class ApiService {
   constructor(private http:HttpClient) { }
 
   postEmployee(data:any) {
-    return this.http.post<any>("http://localhost:3000/posts", data)
+    return this.http.post<any>("https://dev.softlabit.com/api/v1/blog/add-blog", data)
     .pipe(map((res:any)=>{
       return res;
     }))

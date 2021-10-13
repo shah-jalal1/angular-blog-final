@@ -1,7 +1,7 @@
 import { PostModel } from './post-model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ApiService } from './api.service';
+import { ApiService } from '../../services/api.service';
 
 
 @Component({

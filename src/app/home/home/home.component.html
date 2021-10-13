@@ -1,1 +1,9 @@
-<p>home works!</p>
+<div class="card text-center m-2" *ngFor="let item of postDatas.data">
+    <div class="card-body">
+      <h5 class="card-title">{{item.title}}</h5>
+      <h4>Author: {{item.author}}</h4>
+      <p class="card-text">{{item.shortDescription}}</p>
+      <a href="#" class="btn btn-primary">Read More</a>
+    </div>
+  </div>
+

@@ -57,7 +57,7 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.getAllPost();
       },
         err => {
-          alert("something went wrong")
+          alert(err)
         })
   }
 
@@ -88,7 +88,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   onEdit(row: any) {
     this.showAdd = false;
     this.showUpdate = true;
-    this.postModelobj.id = row._id;
+    this.postModelobj._id = row._id;
     this.formValue.controls['title'].setValue(row.title);
     this.formValue.controls['author'].setValue(row.author);
     this.formValue.controls['slug'].setValue(row.slug);
@@ -102,9 +102,11 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.postModelobj.slug = this.formValue.value.slug;
     this.postModelobj.shortDescription = this.formValue.value.shortDescription;
 
-    this.api.updatePost(this.postModelobj, this.postModelobj.id)
+    this.api.updatePost(this.postModelobj)
       .subscribe(res => {
         if (res.success) {
+          console.log(this.postModelobj);
+          console.log(res)
           alert("updated successfullay");
           let ref = document.getElementById('cancel');
           ref?.click();

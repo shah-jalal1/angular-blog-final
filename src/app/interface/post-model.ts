@@ -1,5 +1,5 @@
 export class PostModel{
-        id: number = 0;
+        _id?: string;
         // id: string = '';
         title : string = '';
         author : string = '';

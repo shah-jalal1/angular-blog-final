@@ -26,15 +26,15 @@ export class ApiService {
       }));
     }
 
-    getPostById(id : number) {
-      return this.http.get<{success: boolean; data: PostModel[]; count: number}>(API_BLOG+'get-blog-by-blog-id/'+id).pipe(map((res:any)=>{
+    getPostById(_id : number) {
+      return this.http.get<{success: boolean; data: PostModel[]; count: number}>(API_BLOG+'get-blog-by-blog-id/'+_id).pipe(map((res:any)=>{
         return res;
       }));
     }
 
 
-    updatePost(data: any, id: number){
-      return this.http.put<{success: boolean; data: PostModel[]; count: number}>(API_BLOG+'edit-blog-by-id/'+id, data).pipe(map((res:any)=>{
+    updatePost(data: any){
+      return this.http.put<{success: boolean; data: PostModel[]; count: number}>(API_BLOG+'edit-blog-by-id/', data).pipe(map((res:any)=>{
         return res;
       }));
     }

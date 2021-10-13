@@ -1,4 +1,4 @@
-import { PostModel } from './post-model';
+import { PostModel } from '../../interface/post-model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
@@ -12,7 +12,7 @@ import { ApiService } from '../../services/api.service';
 export class AdminComponent implements OnInit {
 
   formValue !: FormGroup;
-  employeeModelobj : PostModel = new PostModel(); 
+  postModelobj : PostModel = new PostModel(); 
   postData !: any;
   showAdd!: boolean;
   showUpdate !: boolean;
@@ -27,36 +27,36 @@ export class AdminComponent implements OnInit {
       slug: [''],
       shortDescription: ['']
     })
-    this.getAllEmployee();
+    this.getAllPost();
   }
 
-  clickAddEmployee() {
+  clickAddPost() {
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
   }
 
-  postEmployeeDetails() {
-    this.employeeModelobj.title = this.formValue.value.title;
-    this.employeeModelobj.author = this.formValue.value.author;
-    this.employeeModelobj.slug = this.formValue.value.slug;
-    this.employeeModelobj.shortDescription = this.formValue.value.shortDescription;
+  postPostDetails() {
+    this.postModelobj.title = this.formValue.value.title;
+    this.postModelobj.author = this.formValue.value.author;
+    this.postModelobj.slug = this.formValue.value.slug;
+    this.postModelobj.shortDescription = this.formValue.value.shortDescription;
 
-    this.api.postEmployee(this.employeeModelobj)
+    this.api.postPost(this.postModelobj)
     .subscribe(res=> {
       console.log(res);
-      alert("Employee Added Successfully");
+      alert("Post Added Successfully");
       let ref = document.getElementById('cancel');
       ref?.click();
       this.formValue.reset();
-      this.getAllEmployee();
+      this.getAllPost();
     },
     err=> {
       alert("something went wrong")
     })
   }
 
-  getAllEmployee() {
+  getAllPost() {
     this.api.getPost()
     .subscribe(res=> {
       // console.log(res.data)
@@ -64,39 +64,39 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  deleteEmployee(row: any) {
-    this.api.deleteEmployee(row._id)
+  deletePost(row: any) {
+    this.api.deletePost(row._id)
     .subscribe(res=> {
       console.log("Delete row", row);
-      alert("employee deleted");
-      this.getAllEmployee();
+      alert("Post deleted");
+      this.getAllPost();
     })
   }
 
   onEdit(row: any) {
     this.showAdd = false;
     this.showUpdate = true;
-    this.employeeModelobj.id = row._id;
+    this.postModelobj.id = row._id;
     this.formValue.controls['title'].setValue(row.title);
     this.formValue.controls['author'].setValue(row.author);
     this.formValue.controls['slug'].setValue(row.slug);
     this.formValue.controls['shortDescription'].setValue(row.shortDescription);
   }
 
-  updateEmployeeDetails() {
+  updatePostDetails() {
    
-    this.employeeModelobj.title = this.formValue.value.title;
-    this.employeeModelobj.author = this.formValue.value.author;
-    this.employeeModelobj.slug = this.formValue.value.slug;
-    this.employeeModelobj.shortDescription = this.formValue.value.shortDescription;
+    this.postModelobj.title = this.formValue.value.title;
+    this.postModelobj.author = this.formValue.value.author;
+    this.postModelobj.slug = this.formValue.value.slug;
+    this.postModelobj.shortDescription = this.formValue.value.shortDescription;
 
-    this.api.updateEmployee(this.employeeModelobj, this.employeeModelobj.id)
+    this.api.updatePost(this.postModelobj, this.postModelobj.id)
     .subscribe(res => {
       alert("updated successfullay");
       let ref = document.getElementById('cancel');
       ref?.click();
       this.formValue.reset();
-      this.getAllEmployee();
+      this.getAllPost();
     })
   }
 

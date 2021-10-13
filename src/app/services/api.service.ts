@@ -9,7 +9,7 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
 
-  postEmployee(data:any) {
+  postPost(data:any) {
     return this.http.post<any>("https://dev.softlabit.com/api/v1/blog/add-blog", data)
     .pipe(map((res:any)=>{
       return res;
@@ -34,14 +34,14 @@ export class ApiService {
     //   }));
     // }
 
-    updateEmployee(data: any, id: number){
+    updatePost(data: any, id: number){
       return this.http.put<any>("https://dev.softlabit.com/api/v1/blog/edit-blog-by-id/"+id, data).pipe(map((res:any)=>{
         return res;
       }));
     }
 
 
-    deleteEmployee(id: number){
+    deletePost(id: number){
       return this.http.delete<any>("https://dev.softlabit.com/api/v1/blog/delete-blog-by-id/"+id).pipe(map((res:any)=>{
         return res;
       }));

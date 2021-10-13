@@ -1,4 +1,4 @@
-import { PostModel } from './../../admin/admin/post-model';
+import { PostModel } from '../../interface/post-model';
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,16 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  employeeModelobj : PostModel = new PostModel(); 
+  postModelobj : PostModel = new PostModel(); 
   postDatas !: any;
 
   constructor(private api : ApiService) { }
 
   ngOnInit(): void {
-    this.getAllEmployee();
+    this.getAllPost();
   }
 
-  getAllEmployee() {
+  getAllPost() {
     this.api.getPost()
     .subscribe(res=> {
       // console.log(res.data)

@@ -1,7 +1,8 @@
 import { PostModel } from '../../interface/post-model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,7 +10,9 @@ import { ApiService } from '../../services/api.service';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit, OnDestroy {
+
+  private subData: Subscription = new Subscription;
 
   formValue !: FormGroup;
   postModelobj: PostModel = new PostModel();
@@ -111,6 +114,11 @@ export class AdminComponent implements OnInit {
       }, (err) => {
         console.log(err)
       })
+  }
+  ngOnDestroy() {
+    if (this.subData) {
+      this.subData.unsubscribe();
+    }
   }
 
 }

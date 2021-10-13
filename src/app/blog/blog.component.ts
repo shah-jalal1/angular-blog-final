@@ -1,13 +1,16 @@
 import { ApiService } from 'src/app/services/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   styleUrls: ['./blog.component.css']
 })
-export class BlogComponent implements OnInit {
+export class BlogComponent implements OnInit, OnDestroy {
+
+  private subData: Subscription = new Subscription;
 
   blogId: any;
   postData !: any;
@@ -32,6 +35,12 @@ export class BlogComponent implements OnInit {
       }, (err) => {
         console.log(err)
       })
+  }
+
+  ngOnDestroy() {
+    if (this.subData) {
+      this.subData.unsubscribe();
+    }
   }
 
 }

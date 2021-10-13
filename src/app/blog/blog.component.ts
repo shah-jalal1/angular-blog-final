@@ -9,7 +9,7 @@ import { ActivatedRoute, Routes } from '@angular/router';
 })
 export class BlogComponent implements OnInit {
 
-  blogId:any;
+  blogId: any;
   postData !: any;
 
   constructor(private route: ActivatedRoute, private api: ApiService) { }
@@ -18,15 +18,20 @@ export class BlogComponent implements OnInit {
     console.warn("user id is: ", this.route.snapshot.paramMap.get('id'));
     this.blogId = this.route.snapshot.paramMap.get('id');
     this.getPostById();
-   
+
   }
 
   getPostById() {
     this.api.getPostById(this.blogId)
-    .subscribe(res=> {
-      console.log(res.data)
-      this.postData = res;
-    })
+      .subscribe(res => {
+        if (res.success) {
+          console.log(res.data)
+          this.postData = res;
+        }
+
+      }, (err) => {
+        console.log(err)
+      })
   }
 
 }

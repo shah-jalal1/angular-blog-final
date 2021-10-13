@@ -12,13 +12,13 @@ import { ApiService } from '../../services/api.service';
 export class AdminComponent implements OnInit {
 
   formValue !: FormGroup;
-  postModelobj : PostModel = new PostModel(); 
+  postModelobj: PostModel = new PostModel();
   postData !: any;
   showAdd!: boolean;
   showUpdate !: boolean;
 
 
-  constructor(private formBuilder : FormBuilder, private api: ApiService) { }
+  constructor(private formBuilder: FormBuilder, private api: ApiService) { }
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
@@ -43,34 +43,43 @@ export class AdminComponent implements OnInit {
     this.postModelobj.shortDescription = this.formValue.value.shortDescription;
 
     this.api.postPost(this.postModelobj)
-    .subscribe(res=> {
-      console.log(res);
-      alert("Post Added Successfully");
-      let ref = document.getElementById('cancel');
-      ref?.click();
-      this.formValue.reset();
-      this.getAllPost();
-    },
-    err=> {
-      alert("something went wrong")
-    })
+      .subscribe(res => {
+        if (res.success) {
+          console.log(res);
+          alert("Post Added Successfully");
+          let ref = document.getElementById('cancel');
+          ref?.click();
+          this.formValue.reset();
+        }
+        this.getAllPost();
+      },
+        err => {
+          alert("something went wrong")
+        })
   }
 
   getAllPost() {
     this.api.getPost()
-    .subscribe(res=> {
-      // console.log(res.data)
-      this.postData = res;
-    })
+      .subscribe(res => {
+        if (res.success) {
+          this.postData = res;
+        }
+      }, (err) => {
+        console.log(err)
+      })
   }
 
   deletePost(row: any) {
     this.api.deletePost(row._id)
-    .subscribe(res=> {
-      console.log("Delete row", row);
-      alert("Post deleted");
-      this.getAllPost();
-    })
+      .subscribe(res => {
+        if (res.success) {
+          console.log("Delete row", row);
+          alert("Post deleted");
+        }
+        this.getAllPost();
+      }, (err) => {
+        console.log(err)
+      })
   }
 
   onEdit(row: any) {
@@ -84,20 +93,24 @@ export class AdminComponent implements OnInit {
   }
 
   updatePostDetails() {
-   
+
     this.postModelobj.title = this.formValue.value.title;
     this.postModelobj.author = this.formValue.value.author;
     this.postModelobj.slug = this.formValue.value.slug;
     this.postModelobj.shortDescription = this.formValue.value.shortDescription;
 
     this.api.updatePost(this.postModelobj, this.postModelobj.id)
-    .subscribe(res => {
-      alert("updated successfullay");
-      let ref = document.getElementById('cancel');
-      ref?.click();
-      this.formValue.reset();
-      this.getAllPost();
-    })
+      .subscribe(res => {
+        if (res.success) {
+          alert("updated successfullay");
+          let ref = document.getElementById('cancel');
+          ref?.click();
+          this.formValue.reset();
+        }
+        this.getAllPost();
+      }, (err) => {
+        console.log(err)
+      })
   }
 
 }

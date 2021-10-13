@@ -1,9 +1,9 @@
 <div class="card text-center m-2" *ngFor="let item of postDatas.data">
     <div class="card-body">
-      <h5 class="card-title">{{item.title}}</h5>
-      <h4>Author: {{item.author}}</h4>
-      <p class="card-text">{{item.shortDescription}}</p>
-      <a href="#" class="btn btn-primary">Read More</a>
+        <h4>{{item.title}}</h4>
+        <h6 class="card-title">Author: {{item.author}}</h6>
+        <p class="card-text">{{item.shortDescription | slice:1:150}}</p>
+        <a routerLink="blog/{{item._id}}" class="btn btn-primary">Read More...</a>
     </div>
-  </div>
-
+</div>
+<router-outlet></router-outlet>

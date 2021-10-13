@@ -22,6 +22,12 @@ export class ApiService {
       }));
     }
 
+    getPostById(id : number) {
+      return this.http.get<any>("https://dev.softlabit.com/api/v1/blog/get-blog-by-blog-id/"+id).pipe(map((res:any)=>{
+        return res;
+      }));
+    }
+
     // getEmployee(){
     //   return this.http.get<any>("http://localhost:3000/posts").pipe(map((res:any)=>{
     //     return res;

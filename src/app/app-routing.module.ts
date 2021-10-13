@@ -1,3 +1,4 @@
+import { BlogComponent } from './blog/blog.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,7 +12,11 @@ const routes: Routes = [
    {
     path: 'admin', 
      component: AdminComponent 
-  }
+  },
+  {
+    path: 'blog/:id', 
+     component: BlogComponent 
+ }
 ];
 
 @NgModule({
